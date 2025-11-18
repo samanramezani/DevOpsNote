@@ -1,2 +1,1723 @@
-salam
-khobi?
+best site for yaml-kuber resource:
+k8syaml.com >>>>>> kheiliiiii khafaneeeeee
+k8s-examples.container-sloution.com
+
+
+orchestration: 1-kuber(google) 2-swarm 3-mesos(apache)
+amazon omad kubero bardasht customize kard esmeshuu gozasht > EKS (elastic kubernets service)
+microsodt omad customize kard > AKS (azure kubernetes service)
+redhat > openshift mituni baaa kubectl ham managesh kooni mituni ba web ham managesh koni k esmesh gui hast (okd)
+suse > rancher
+google > kubeadm
+
+
+openstack asln rabti b kuber nadare y narmafzre baraye private cloud hesab mishe ( vase NASA)
+y joraei mahsole moshabehe openstakc mishe vmware tanzooo vali bazam ba ham fargh daran
+chun openstack comptue ro manage mikone
+vali tanzooo bazam bahse virtualization hastesh
+tanzoo ham omade kuber roo costomize karde
+check cncf.io
+
+kuber component: api server- etcd- schedular- controller- container runtime- kubelete (agent k bar roye worker node haa nasb mishe) -  kube proxy - ca- coredns - cloud controller manager
+
+master: kube api server- etcd- kube controller manager- scheduller - kubelete- kube proxy - ca- coredns - cloud controller manager
+worker: kubetlete- container runtime (crio- rkt(rocket))- kubeproxy 
+tips: inaaa intori kar mikonan:
+user baaa cli yaa shayd GUI miyad vasl mishe b cluster kuber
+user configeshu b api server mide
+api server config roo toye etcd minevise
+bad api server b schedulaer mige bro bebin ozaye loadd roye server haa ch joriyast
+sheduler node haroo check mikone bebiniee load koja kam tare
+bad khode scheduler miyad b controllermanager migeeeee masaln folan node haaa okeyan k beri load bezari roshun
+bad contorll-managerm mire b kubelete roye node haaa vasl mishe ( khode contorll manager in karoo mikne na api server) - yani kubecontroller mostaghim baa kubelete haye roye node haaa sohbat mikone. 
+bad kubelete dastorat rooo b docker k roye har node hast mide
+vaaa har chnd saniye y bar kubelete az taraft khodesh y gozareshi az pod haa 1/1 2/2 b kubecontroller mide
+contoller vaziate hame node haro az kubelete haye hame hosthaaa migireeee va jam mikone age az desire config kam tar bashe in proccess az aval tekrar mishe age ham k ok bashe k khob hich
+
+
+
+vali nokte mohem ine k dakhele master haaa
+hame module haaa faghta va faght tavassote api server ba ham sohbat mikonan
+yani in k scheduler va controller-manager az tarighe api server ba ham sohbat mikonan
+va faghat ham api server hast k ba etcd sohbat mikone.
+
+
+hala hame in module haaaa  api server- etcd- schedular- controller- container runtime- hamegi pod hastan k roye baster container va pod bar roye kuber miyan balaaaaaaa---- yani hame chi royeee master pod hastesh
+vase hamin k maa roye master ham kubelete darim k betune vaziate pod haye systemi rooo check kone va gozaresh bede kube-controller
+tanhaaa chizi k mahiyat pod nadare kubelete k az jense systemd hastesh k age in pod haye mohem systemi moshkel khord betunim tshoot konim
+vase hamin roye master ham maaa kubelet rooo nasb mikonim.
+
+kubeproxy karesh chiye?
+aval inooo bedon k roye ham master ham work maaaa kubelete vaa kubeproxy darim (pas roye hame nodehaaaaa)
+component haa vase kar baaa ham trafficeshun ro midan b kubeproxy
+masaln vaghti kubcontroller mikhan ba kubelete y work sohbatk kone
+trafficeshuuuu mide b kubeproxy roye khodesh un traffic ro mide b kubeproxy roye worker vaa kubeproxy worker mide b kubelete hamon node
+bar aksesham hast
+worker traffico mide b kubelte khodesh > kube proxy khodesh > kubeproxy master > component morede nazar roye master 
+pas kube proxy ham b unvane proxy server raftar mikone ham reverse proxy
+vaaaaaaaaa inooo bedon toye kuber hich traffici mostaghim nemitunan b ham traffic bedan
+htmn htmn htmn byad in traffic b kubeproxy haye un node aval bereeeeeeeee 
+
+
+pas kubelete faght roye worker nasb mishe vaa ba kube-contrller k roye master haa vojod dare sohbat mikone.
+albate mitunim toye master ham nasb konim k recommned ham hamin hast k maaa roye hame node ha ch master ch worker kubelete ro nasb konim chun kubelete jensesh systemd hastesh vaa khob age moshkeli toye laye kuber pish biyd komakemon mikone
+nokte mohem chiye? in k kubeadm ya hamon kuber vase maa kubelete ya kubectl ro na nasb mikone va naa manage mikone
+pas ma bayd joda joda kubelete va kubectl ro nasb konim vaaa bayd koli tavajoh konim k version kubectl va kubelete ba version kuber(kubeadm) k darim nasb mikonim compatible bashe
+pass roye hame kubeadm kubelete kubectl nasb misheeee vaa tamam
+
+
+
+ingress chiye?
+b traffic vorodiye b cluster kuber az outside cluster migan traffic ingress
+fk kon 6 ta server darim > 3 ta worker 3 taaa master
+vase in k ha dashte bashim roye worker haaaa miyam y ha proxy dorost mikonim 
+badesh user mizanw b ip ha proxy 
+un miyad beyen 3 taa work haaa pakhsh mikone vaaa bad traffic  mire samte ingress service workerhaaaaaa
+age in ha proxy biyofte khob kolan service dg dastresi behesh ghat mishe
+hala chi kar karde kuber k moshkel ro hal kone?
+mige mituni ha proxy baremetal roo bezari kenar
+man khodam toye kuber y pod daram k traffic vorodiye contorll mikonam (ingress service)
+k miyad in kare ha proxy baremetal biron cluster ro shabih saz mikone
+kuber khodesh y pod rooo k tosh omade nginx ro custom karde esmeshu gozashte nginx-ingress roye yeki az in 3a worker miyare balaaaaaaa va kare haproxy ro gardan migire
+hosnesh nesbat b haproxy baremetal khodemon ineee k age in pod roye worker1 az kar biyofte hamin pod rooo roye worker 2 miyare blaaaa va baz kare haproxy ro beyne 3 taaa nod ajam mide
+miseh jaye in chizaye dg ham estefade kard albate (haproxy- trafic- ingress nginx k male khode nginx va .....)
+pas mishe tafffic vorodi b cluset kuber rooo ba haproxy baremetal handel kard
+ya na mishe ba haproxy dakheli khode kuber vaa pod base
+yaa naaaa waf gozashte jolosh
+in delkhah vaaa senario mehvareeee
+
+
+
+etcd? 
+ma fagt az targheee apiserver mitunim roye etcd benevisim
+va api server ch jori authenticate mikone k az ch kasi mitune dastore begire? y tokne mikhad
+in token y joraei hamon kubeconfgi hastesh
+har kasi k in token ro toye kubeconfigesh dashte basheee vaaa betune master ro ping bokone mitne b api server vasl beshe va b tab mitune etcd ro update kone.
+
+
+how scheduling work??????????
+injori:
+kube-scheduler: tasmim migire k roye ch nodei workload ro bezare baraye start pod haaaa
+albate y joraei bahse resource manager ham hesab mishe chun resource requirmetn rooo aval check mikone
+y joraei bahse affinity role va antiaffinity harooo in module karashuu mikone.
+khob scheduler vase in k node haro entkhab kone ch mavaredi roo baresi mikone:
+* resource ro check mikone: mibine aspecti k to toye yaml deploymetn ya pod gofti rooo ch nodei dare va meet mikone
+* check node capacity: har workeri k ram cpu bishtar hardwareiii rosh bashe pod haye bishtari khahad dasht
+
+* node selector : mituni toye yamlet begiii masalan age mikhay deploy koni broo beyne 20 ta worker faghat toye worker 1 2 3 entekhab kon
+mituniiiii work hattt label bezaniiiii ba dastor :
+kubectl label nodes vm-worker-02 disk=ssd
+kubectl label nodes vm-worker-03 disk=ssd
+in miyad roye host vm-worker-02  &&& vm-worker-03  yyy label mizare k to az in b bad mituni age khasti pod biyari bala vaa sorat bala tar khasti ba in label mituni begi broo faght ro in hostaaaa emal kon
+in lable haro age khasti bebini mituni ba dastore
+kubectl describe nodes vm-worker-03 toye bakhshe label bebinishunnnnn
+khastiam label roo pak koni dastor dareeeeeeee
+kubectl label nodes vm-worker-03 disk-
+ya dastoreeee 
+kubectl get nodes --show-label > in koleeee lable haro neshun mide
+
+* affinity / anti affinity >>> in vase node va pod jodast
+ma vase node faght affinity darim 
+vali vase pod  affinity va anti affinity darim
+affinity roye node chi mige: mige k masln 2 taaa pod hamishe kenare ham bashn -age yeki raft roye y node dg pod 2vom ham bere roye un node-hamishe kenare ham bashan
+
+
+anti affinity roye pod chi mige: masln mikhay 2 taaa pod hamzan ba ham roye y node naran injaam miyay pod anti affinity minevisi
+pod affinity in base miseh k pod haaaa faght roye node haye khasi k masaln folan label ro daran fix beshan 
+yaa kolan roye folan nodeee asln naran
+affinity : allows to set rules based on the nodes labels or pods lable
+anitaffinity: prevent pods from begin scheduled on the same node or group of nodes
+hala in affinity va anti affinity haaaa mitunan toye 2 taa model configure beshan : requried:ejbari &&& prefered: ekhtiari
+khob ch jori mishe in affinity haro emal kard: 
+toye yaml pod k dari ijad mikoni mituni zire spec tanzimat affinity ro emal koni
+
+* taint and and tolerations: inooo hame ba affinity eshtebah migiran
+node affinity chi bod : y property vase pod bod k mitune prefer yaaa requried bashe k y pod begeee man mikham roye folan node haaaaaaa migrate sham ya biyam bala
+vali taint y vijegiye k roye node emal mishe k node mitune > allow nodes to reject certain pods halaaaaa ba chi mishe check kar vaziate taint roo ba kubectl describe nodes master -o  wide
+3 model dare: *noschedule * noexecute * prefernoscheduler
+y mesal sade ine: didi nemituni roye master pod biyari, chera? chun roye inaaa taint az noe noschedule config shode by default
+
+
+toleration: applied to pods and enable the scehduler to schedule them on nodes that have corresponding taints
+hala in yani chi ? fk kon y pod mikhad biyd balaaaaaaa shomaaa 3 taaa worker dari k roye in hostaaa label zadi disk=ssd
+roye pod ham y node affinity nevesht k bro roye host haeiee k lable disk=ssd dare
+ta injaaa in pod mitune roye in 3 taa worker biyad balaaaaa
+vali miyay roye worker 1 b joz label disk=ssd y taint ham minevisi az noe noschedule
+hala dg worker1 in pod ro ghabul nemikone va in pod faghat mitune bere roye worker 2 va 3 haaaaamin
+
+
+kubectl: esme dgash mishe kubecontroll ham migan behesh
+commandline utility hesab mishe
+
+
+
+
+dobare video in affinity vaa taint rooo bebin htmn
+
+#####################################################  priority Class &&& preemption policies ####################################
+priority class y object kuber hesab misheeee, yani kind:priorityClass darim
+inaaaa 2 taa parameter hastan k mishe roye pod vaaa deployment tanzim kard
+
+priority class y parameter k mituni b pod bedi az 0 taaa 1milyon har chi bishtar balaaa tar
+
+preemption policies chiye ? bar asase priority classi k bala set kardi roye pod set kardi tasmim migire ch kari anjam bedeeeeeee
+
+#####################################################  PDB-- pod disruption buget ####################################
+
+ino bekhun
+
+######### Auto Scaling #############################
+HPA: horizontal pod autoscaling > b in scaleout/ scalein ham migan >>>> y resource hastesh
+salce out > ziyad kardan
+scale in > kam kardan
+
+masalan to y deploymtn ijad kardi gofti 8 taa pod biyad balaaaaaaaaaaa
+hala load rafte balaaaaaa in HPA mitune biyad bedone in k man khodam bekham  8 ro bokonam 12 vasam in karooo handel bokone
+masaln shart mizari age in 8 taa pod totaliii 80% kole cpu haei k behesh ekhtesas dadi rooo used kardan un moghe biyaaaa in 8 taaa ro ta 12 ta pod ezafe koni. masln miyad y done ezafe mikone mishe 9 taaa- khob in 9 taa cpu seage ro mikone 75%- baz k cpu shod 80% darsad yeki dg ezafe kon va ........
+mituni hata time ham bedi k age 5 min cpu usage balaye 80% darsad bod biyaa in karo bokon- mituni begi 2 ta 2 taa - yaa har chand ta chn taaaa - ya mituni age y sharayeti ro meet kard kolan pod roooo kam koi :)
+toye tanzimat deploymetn misheee y seri shart gozasht k in hpa ro vasamon config koneeeee
+
+VPA: vertical Pod autoscaling >>> b in sacle up and scale down >  in miyad resource har pod roo estefade mikoneee >>> y object hastesh
+
+############################################################# configmap , enviromrnt variable, secret ##################################
+toye docker vaghti mikhast config khastii ro vase y service toye container bezari miyomadi az mount kardan vloume ooo file inaaaa az ro local dakhele container estefadem ikardi
+masaln mikhasti config nginx.conf rooo bezari dakhele contaniner:
+./nginx.conf:/etc/nginx/nginx.conf
+yaa
+/config:/config
+injori age 20 taa docker host dashtii bayd in file haye config ro roye har 20 taa dockert copy mikardi k betuni 
+vali toye kuber fk kon mikhay 8 taa pod y tanzim ya config khas roo ba ham dashte bashan
+injaa dg miyay soraghe configMap
+ocnfigmap yani in k tanzimat configurationiiiiiiii man az toye etcd biyad mount beshe toye pod haye man 
+dg man nakham joda jodaaaa mount konam in tanzimat rooooooooooo mesle docker
+
+
+toye config map mituniiii har chi mikhay roooo  dakhele pod haaa mount koni (masaln mituni yek yaa chnd taa file ba config map besazi vaa unroo mount koni) yaaa b sorate env set  beshe rooo begiii
+
+farghe config map ba secret chiye?
+config map ro azash desciribe migiri content kameln moshakhaseee
+vali toyeeee secret intori nist
+
+kubectl apply -f config-mohsen.yaml
+kubectl get cm -n ns-1
+kubectl describe cm -n ns-1 config-mohsen.yaml
+
+
+
+
+
+
+high level container run time = docker - LXC - rkt - podman - CRI-O (in male khode google va kuber hesab mishe)
+low level container run time = containerd (ejraye container) - runc (sakht container)
+orchesterator haaa : inaa omadan balaye sare highlevel  container runtime haaaa - docker sarm / kuber / apache mesos / openshift / rancher
+az y updatiii b bad kuber omad goft man high level nemikham dg shoma faght containerd k low level nasb kon man khodam handel mikonam
+valiii age dost nadari mituni az inam estefade koni : cri-o / cri-dockerd (male sherkat mirantis) in vase kasaei k dost daran highlevelshun docker baseh khobe
+
+installing kuber: 1-minikube (single node cluster :)) 2-kubeadm (profesional kuber cluster)
+vase kar ba joftesh ham bayd kubectl nasb koni
+
+
+kuber khodesh y ca server dareee k dare cert va key tolid mikone- 
+hame componenthaaaa dakheli kuber y url daran k ba in ca sign shodan va modateshun yek salast
+bade 1 sal yaaa expire mishan ya bayd renow koni yaaa bayd kuber ro update koni k in tarikh baz tamdid sheee
+api server khode kuber y url dare az noe https k ca khode kuber vase har componmnet  joda joda cert va key ijad karde
+proxy  khode kuber y url dare az noe https ba ca va key mokhtash b khodesh
+scheduler khode kuber y url dare az noe https ca va key mokhtash b khodesh
+contoller khode kuber y url dare az noe https ca va key mokhtash b khodesh
+
+
+pas zamani k to ba kubectl ba api server sohbat mikoniiii dari  amalan ba y app(backend sohbat mikoni) k khode in apiserver(backedn) vazifeye neveshtan toye database rooo b ohde dare.
+
+
+rastiiiii y component mohem dg k kuber dare kenare ca server oooo kubelete vaaa kube proxy oo inaaaa y chizi b esme coredns
+ba coredns hameye podhaaaa mitunan ems pod dg rooo ping konan- kheiliiii vijegiye mohemiyeeeee 
+
+API chiye?
+api server = backend server
+
+zamani k to ba kubectl(frontend) ba api server(backedn) sohbat mikoniiii amaln dari b yek apiserver az noe REST sohbat mikoni
+ghabl az har chiz bedon k stateless yaaa statefull chiye?
+bebin y admin aval az team app miporse k applicationetun stateless hast yaa statefull
+hala in k application stateless ya statefull hast yaa naaa naaa ro bayd did toye backedn application az ch tecknology estfefad shode: restfull -soap - grpc- websocket
+hame inaaa stateless hastan b gheiireee websocket k statefull hastesh
+stateless > request & response- yani session hmishe baz niyaz nadari melse http
+statefull > hamishe niyaz k statefull basheeee mesle ssh
+databse haaa hamegi stateful kar mikonan- yani ertebat backend va db hamishe statefull hastan
+
+
+
+
+namespace chiye? 
+namespace yek vijegiye kernel linuxe k mishe resource haye kernel (sakhafzari) rooo vase proccess haye mokhtalef az ham isoltae konim.
+in k betuni chand taaa proce ra az baghiye proce haaaa jodaaa koni amlan in proce harooo mizari toye y namespace jodaaaa
+
+type of namespace:
+*mount (storage)
+*cgroup (control group) k mishe hamon bahse mizan masraf cpu va ram mishe
+* network
+* PID
+* inter proccess communication (ipc)
+* UTC (unit time sharing)
+* user id
+* time namespace
+va in name space haaa 8 ta hastan
+
+container chun toye in 8 taaaaa namespace joda hastesh behsh migim container :)
+container faghat va faght az kernel host estefade mikoneee vaaa dg toye sayere namespace haye balaa b sorate koli hich ertebati b proccess haye un host physici nadare
+yani pid haye dakhele container az 1 shoro mishe
+storage joda dare
+ip khodeshu dare
+cgroup haye khodeshu dareeee
+va.......
+
+ma toye kuber ham namesapce darim k behesh migan namespace in kubernetes
+chi mishe in daghighan? 
+namespace provides a mechanism for isolating groups of resource within a single cluster- for use enviroment with many users-teams and project
+in k y seri pod rooo kenare ham bezarim va az baghiye pod haaa joda konim (isole konim)
+by default toye kuber ma 4 ta namespace default darim: 
+*default
+*kube-node-lease
+*kube-public
+*kube-system > pod haye systemi injast
+
+fk kon y master va 2 worker dari
+bezani 
+kubectl get pods -n kube-system
+inja 3 ta kubeproxy neshun mide- chun 3 taa node darim - kubelte ham k ba systemd manage mishe
+2 ta pod coredns k mitune ro master ya worker bashe- fargh nemikone
+
+by default har podi biyari balaaa toye ns default miyd bala
+
+
+
+bahse cgroup dar nasb kuber chiye?
+cncf k community miyad mige age mikhayn y chizi desgin konid dg movazi kari nakonid 
+masaln age mikhay docker benevisi va overlay khasti overlay ro khode linux neveshteeeee dg to bazam rosh kar nakon 
+vase hamin docker az overlay khode linux estefade kard
+valiii in mozo toye cgroup ok nabod
+docker omad goft k mn cgroup khode linuxo dost ndaram
+khodam cgroup khodamo minevisam- pas shomaaa vaghti docker yaaaa containerd ( k in y low containerruntime hast va vase khode sherkat docker ham hast) nasb mikoni miyd c group khodeshu nasb mikone
+pas zamani k shomaaa miyay containerd nasb mikoni vase nasb kuber in mige man az cgroup khodam mikham estefade konam 
+valiii kuber dg ba in ok nist mige az docker cgroup drive nemitunanm estefade konam
+ps vase inee k miyam taghir midim 
+va migim k kuber az systemd cgroup driver k vase khodeee linux hasttttt estefadeee kone
+vali age az cri-o k container runtime k khode kuber neveshte estefade koni in moshkel asln vojod nadare va khode cri-o az systemd cgroup driver khode os estefade mikone.
+pas zamani k az contarind estefade kardim mirm /etc/containerd/config.toml va mgim systemcgroup = ture
+
+
+
+faAlsazi 2 taa module k kuber behesh niyaz dare:
+aval bezar begam module chiye!
+bebin kernel shamel tedade ziyadi module hast k ertebat laye narmafzari(os) rooo ba sakht afzar daran ijad mikonan.
+toye windows behsh migim driver
+toye linux mituni module haro load vaa unload koni
+insmod
+rmmod
+lsmod
+
+kuber vase nasb mige htmn  2 ta module ro load kon,hala in 2 taa module chiye? 1- br_netfilter 2-overlay
+age az in dastorat estefade konim :
+insmod
+rmmod
+lsmod
+inaaaa dependecy module haroo load nemikonan vali y dastore dg darim
+modprobe k in khodesh ham depency haye yek module rooo ham load mikone
+hala k in 2 taa module roo load kardim bayd b kernel paramert haye dorost in module haro ham begim
+sysctl -a > in hame kernel parametr harooo neshun mide 
+sysctl -w x=5 > ba in mituni value ro toye lahze tnazim koni vaa emal koni
+/etc/sysctl.conf > in tanzimate permanent va vaghti reboot midi dobare in file load mishe 
+sysctl --system > in file /etc/sysctl.conf rooo toye lahze roye os emal mikone.
+
+
+
+bash complete dastorate kubeadm va kubectl:
+vase in k dastorate man khod b khoda kamel sheee
+aval miyam bash-completion rooo nasb mikonam
+bad bayd toye masir /etc/bash_completion.d/    config file haye bash compeletion kubeadm va kubectl rooo gharar bedim
+ch jori ? injori
+kubeadm completion bash > /etc/bash_completion.d/kubeadm
+kubectl completion bash > /etc/bash_completion.d/kubectl
+bad y bar dg bash ro reload kon
+bash -l 
+hala dg bash completion ok shodeeeeeee :) 
+
+    
+
+
+
+marahele nasb kubeadm:
+1- make three machine one:master two:worker
+2- install docker on all three host worker&master >>> install containerd.io  .io bashe htmn bedone .io y chize dg mishe
+package containerd.io shamel package haye zire mishe:
+containerd
+runc
+cni-plugins
+va....
+
+3- install kubeadm on all three host worker&master- install kubelete on all three host worker&master (star nakon- khode kuber bayd kubelete ro star kone)- install kubectl on all three host worker&master- please consider version of kubelete and kubectl base on kubeadm version
+(kubeadm vase maa kubelete yaa kubectl nasb nemikone,
+
+4- config master node (initialize)- only on master node
+khob vase init kardan cluster bayd 2 ta parameter behesh pass bedim:
+alef: y joraei marhale 5 ro ham injaa y bakhshishuuu  anjam bedim yani vase init kardan bady begim ch POD Networki ro mikhym estefade konidm
+bee: moshakhas kardn api server
+
+kubeadm init --help
+kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=192.168.10.1<ip master in ip>
+
+kubeadm init chi kar mikone ? injast k taze kuber miri podhayeee asli va systemi (api servr- controller va .....) khodesh roo az registery google download mikone (registery.k8s.io) va run mikone
+hala age maaaa resgitermon local bashe mitunim az in commadn estefade konim
+kubeadm init --image-repositorey <local address >
+to in marhale taze mire check mikone aya kubelet roye os hast ya naaa, abayd htmn bashe vaa vaghti bashe khodesh configeshu minevise tosh vaaa systeDeiiii startesh mikone 
+to in marhale poda haa miyan balaaaaa va dg az injaa b bad ma ba kubectl hastesh k b api server migim ch karhaei vasamon ajam bede masln pod biyar balaaa vaa ......
+bad in k in dastor ejraaa shod toye payamesh mige man y /etc/kubernetes/pki sakhtam ( chun hame componett haye master hamegi certo key khodeshun roo daran vaaa ba https kar mikonan)
+k hameye in certo keyhaaa toye in masir /etc/kubernetes/pki negahdri mishe
+
+
+hala kiya mitunan b api server dastor bedan? hala ba har chi- kubectl gui va .....
+bayd htmn tokn dashte basheeee chun api server https hastesh vaa certo key dare
+hala in certo key kojast? /ect/kubernetes/admin.conf b in file kubeconfig ham gofte misheeeeeeeee
+har ki in file ro dashte bashe mitunu az api server ba har abzari k hast estefade kone
+
+masaln roye loptop khodet mituni kubctl nasb koni file admin.confooo dashte bashiii vasl shiii b yeki az masterat (api server) vaa command bezani
+
+
+hala in chiye > --pod-network-cidr=192.168.0.0/16
+pod network hamon virtual switch khode kuberee k mituni noe in virtual swtich ro entekhab konim (calico - falnnel va ...)
+y vswtich az jense poda k roye node hayee worker miyd balaaaa vaa b khoda workerhaaa ip mide masaln worker1=10.244.1.0 / worker2=10.244.2.0 / worker3= 10.244.3.0
+bad har host pod hash az in range ip migiran
+maslan pod haye roye worker1  ip 10.244.1.1 / 10.244.1.2
+maslan pod haye roye worker2  ip 10.244.2.1 / 10.244.2.2
+va .........
+injori az ip har pod mituni befahmi roye kodom host gharar dareeeee :)
+
+
+
+vali entekhb in vswitch (pod az jesne switch) baaa khedmone.
+falnner 10.244.0.0
+claico 192.168.0.0
+va.....
+
+
+mishe goft bade in k podnetworkooo baaa dastore kubectl apply -f https://docs/project.org/v3.11/manifest/calico.yml    (falnnel ya calico) ok kardim 
+roye har worker y pod b esme (calico yaaa flnel miyare bala)  k in naghshe vswtich+dhcp ro bazi mikone
+b un pod roye worker yek ip toye range  --pod-network-cidr=192.168.0.0/16 ekhtesas mideee- b un pod (calico ya flannel) y ip mide masaln 192.168.0.1- ip mgtm ham k jodast rabti b ip mgmt nadare - bad har podi k roye worker 1 biyad bala az range 192.168.1.0 migire
+royen node2 hamin farayand ba range 192.168.2.0 etefagh miyofte vaa ..........
+
+bade in k dastore:
+kubectl apply -f https://docs/project.org/v3.11/manifest/calico.yml
+rooo zadim y namespace jadid ijad mishe b esme masln calico k pod haye mabot b in dastan unjaaa gharar migireeeee
+va roye hameye host haa (worker va master) y pod jodagone vase calico (kube-calico) ijad mishe
+
+
+
+bade in command kubeadm init -- cluster ijad mishe va command join kardan worker haro ham behet mide
+har nodei k in command ro mizani rosh mire az api server ca hashu 1 sale  migire
+khod b khod kubeletesh config vaaa start vaaa run mishe
+in kar haro ham bayd roye master (ya har noei k dost darim az tarigh un b master vasl beshim) vase bahse etesal b api server vase zadan dastorat baaa kubectl bokonim
+in hamon config kubeconfig k betunim b api server vasl shim, az har jaei k dasterssi networki bashe mitunim ba in config file b api server vasl shim vaa commmand bezanim
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+nokte: mituni kubeadm init ro bedon arguman ham bezani vali khob y seri az component ha pend mimonan mesle coredns va ...
+
+
+
+
+confgi haye marbot b cotroller/kubelete/ scheduler/ va ..... injast : /etc/kubernetes
+
+
+
+5- config POD Network (cluster) calico -cilium- contiv-vpp- kube router- weave Net ---- b ina migan POD Network
+ta zamani k pod Network rooo roye cluster apply nakoni status 
+ba dastore kubectl get pod roooo not ready mibini
+
+hala injaa byad daghighan modele pod network ro apply konim
+kubectl apply -f https://docs/project.org/v3.11/manifest/calico.yml
+bade in commadnd mitunim componnet haro check kard va bayd sabr kard k hame satus haaa running beshan
+kuebctl get pods --all-namespaces > in dastore roye master khorde mishe va byad component haye zir running bashan
+
+hala ch componenthaei bayd running beshan:
+calico-kube
+coredns
+etcd
+kube-apiserver-masternode
+kube-controller--masternode
+kube-proxy
+kube-schedullar-masternode
+
+6- joing worker to cluster
+
+worker haro k join kardi hala mituni roye master commadn bezani va state worker harooo bebini
+kubectl get nodes
+
+
+and the end
+
+
+
+hala dg mituni bahash kar koni
+kubectl run mohsen-test --image=hello-world
+
+
+
+
+
+
+7 *** hala age khasti multi master biyari bala chi?
+command init y chand taaaa item bishtar dareee:
+va badesh age ok bashe y commadn va join worker va y commadn vase join master mide behet
+kubeadm init --apiserver-advertise-address 10.0.2.41 --pod-network-cidr 10.244.0.0/16 --upload-certs --control-plane-endpoint 10.0.2.41:6443
+
+maaa nemitunim ba dastore kubeadm dastori rooo ejra konim k behemon y commadn vase join master behemon bede
+dastore zire coammadn joing worker hastesh naa master:
+kubeadm token create --print-join-command
+vase master sakhtaniye
+ch jori? injroi
+
+tips : age khasti y rozi y master y dafei b cluster ezafe koni
+bayd in karooo bokoni:
+
+aval in >for regeneration join command for master node:
+un dastore k avalin bar behemon dade bod roooo ba in certificate key va token jadid ejra mikonim:
+kubeadm join 10.0.2.41:6443 --token fjhfhfhfjhfjhfjhjhjf --discovery-token-ca-cert-hash shadhddhgdhdhgdhgdd --control-plane --certificate key xxxxxxxxxxxx
+kubeadm token create
+kubeadm init phase upload-certs --upload-cert >>> in y certificate key tolid mikone xxxxxxxxxxxxxxxxxx
+
+
+
+
+tips mohem: 
+commadn haei k mishe zad
+kubectl : vase kar ba cluster toye layee application mesle pod haaa va ......
+kubeadm : vase kar ba laye infra - mesle certificate haaaaaaa-
+kubeadm certs check-expiration
+kubeadm token list
+kubeadm token create
+kubeadm token create --print-join command
+ mesle join kardan worker va master va ......... vase helpesham :kubeadm --help
+
+
+
+##########
+kubectl  api-resources > in hame resource hayeeee mojod roye kuber rooo neshun mide va in mige k ch resource ghabeliyat ino dare k toye y namespace gharar begire yaaa naaaaaaaaaa > chizek khobiye
+kubectl  api-resources > api/version haro mide :)))))))))) > chizeee khafaniyeeeeeeeeee
+kubectl api-versions > api version harooo mide
+crd : costum resource definition
+
+inaaa hame resource hastesh
+deployment
+service
+nodes
+pv
+pvc
+
+hododan 59 taa resource taaa aln darim
+
+
+
+rastiiii chun roye hame host hayeee cluster contanerd nasb kardim
+mutunim ba dastore crictl k commadnline in utility hastesh kar konim bahash
+masaln 
+crictl images
+crictl ps
+mesle docker vali khob containerd toreee dg
+va ..........
+y vaghtaei vase tshoot badak nist
+
+
+
+
+
+====== wroking with POD =======
+
+kubectl creat -f mohsen-yaml > in pod ro misaze vali age yaml ro edit koni dg kar nemikone
+kubectl apply -f mohsen-yaml > ijad - edit va ..... in behtaree
+
+kubectl get ns -o wide
+kubectl get pods -o wide
+kubectl get pods -o wide -n mohsen-ns
+
+
+kubectl cp mohsen.txt -n ns-1 mohsen-pod:/tmp > in file .txt copy kard dakhele container pod mohsen-pod toye masire /tmp
+
+kubectl exec -it -n ns-1 mohsen-pod -- /bin/bash
+
+shomaa vaghti ba pod dari kar mikoni y pod bishtar nemituni biyari bala
+age bishtar az pod bekhay bayd deployment kar koni
+
+
+vaghti y pod miyd bala ping un pod rooo bayd az hame node haye cluster dashet bashiiii in khasiyate vswtich kubereeeeeeee(calico - flannel)
+
+pod yek instance vahed az application( mitune 1 ya chnd ta contariner bashan-app-db-log) ma hastan
+pod kuchik tarin objecti hast k ma toye kuber misazim
+namespace: dakhele yek pod chun namespace yeki hast koliye container haye dakhele yek pod mitunan hamoo bebinam va ba ham communicate konan.
+
+kubectl run mohsen-test --image nginx
+kubectl get pods
+kubectl describe pods
+kubectl get pods -o wide
+
+
+
+rastiii ma hich dastore vase restart pod nadarim :)))) nazaranet sare kaaarrrr b in soalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+byad un pod rooo dlete koni va taghirat ro emal koni
+yaa naaaa
+kubectl apply koni yaml ro edit koni
+restart nadarim vase pod
+
+
+
+
+fk kon 1 master dari 3 taa worker
+vaghti y pod dari ijad mikoni va controller un pod ro roye worker02 mikhad biyare bala worker2 mire az imgae-registery k toye yaml gofti un image ro pull mikonee miyare ro khodesh
+va in pull kardn hich ertebati b master ya node haye dg nadare
+yani age woker2 crash kone va worker 3 bekhad jashu begire worker 3 bayd beree in image ro az image registery pull koneeeee
+yani har worker joda khodesh mire az image registery image haye morede nazareshu pull mikone na az to dele master
+
+toye yaml pod unjaa k dari config containr ro migi y jash hast k mituni imagepullpolicy set koni
+yani chi
+yani age nodei royek khodesh az ghabl image bod dg chi kar kone? bere baz vase lastet versin yaa na hamoni k hasto run kone
+
+
+########################################### replication controll ########################################
+b jaye in k bekhay pod besazi mituni rc ro  besazi va b poda haye moshabhe k mikhyay masaln 5/5 bala bashan baaa label o selecto vasl koni
+
+kubectl get rc -n ns-1 -o wide
+
+3 ways for scaling an rc:
+*kubectl scale command
+masaln:
+kubectl scale -n ns-1 rc mohsen-rc --replicas 8  
+kubectl get pods -n ns-1 -o wide
+
+* eidt yaml file > age yaml mojode
+kubectl apply -f mohsem.yaml
+
+* edit yaml file which uploaded in etcd >>>> yani state in rc rooo az etcd begiri vaaa betuni edit koni - state current ham dare- timestamp dare va ...........
+kubectl edit rc mohsen-rc -n ns-1 >>>> in yaml k hamin aln toye etcd dare kar mikone roooooo behet  neshun mide va mituni edit koni
+
+
+
+moshkel rc chi bid?
+in k age bekhy version image pod hashuuuu taghir bedi bayd un rc ro kamel pak koni
+vase hamin moshkel bod k deploymetn ijaaaa shode :)
+vase hmin rc kolan mansokh shod
+deployemt ba replicaset (RS) kar mikone
+rs roo khode deploymetn handel mikone va rabti b maaa ndareeeeee
+
+zamani k rc mikhasti upgrade koni pod haye y rc ro bayd kole pod ha pak mishodan
+vali baaa deployment vaaa rs in etefagh nemiyofte
+chi mishe
+maslna to ba python 1.3 omadi bodi y deployment ba 5 ta pod ijad karde bodi 
+hala mihy beri roye 1.4 
+chi mishe?
+deploymetn miyad y replicationset jadid baaa pod haye 1.4 miyre balaa in jadidaaaa k up shoddddd rs ghabli k ba version 1.3 bod ro stop mikone va negahesh midare to age khasti mituni dobare startesh koni
+
+######################################## deploymetn ####################
+
+maa vase in k y application biyarim balaaaaaaaa khob pod mikhaym
+in pod mitune yeki az resource haye zir bashe:
+* deploymetn >>> stateless
+
+* daemonset  >>>> stateless   masaln kube-proxy yek daemon set hesab misheeeeeeee yaaaa masaln calicooo ya flannel bad apply shodan hashun b sorate daemonset deploy mishan
+kubectl get ds -o wide -A
+in mige k age y pod khasti biyari bala age 5 taaa worker dari man roye har 5 ta worker y pod miyaram bala mishse 5 az 5 
+age y worker crash kard mishe 4 az 4
+age worker ezafe koni mikonamesh dobare 5 az 5
+passs dg chizi b esme replica ziresh faal nist
+in vase aganet haye prometeous va zabbix vaaa application haye agent base awliyeeeeeeee
+
+* statefulset >>> stateful
+bastegiii b khodemon vaa noe applicaton dareeeee
+
+ 
+edit deploymetn type for base image upgarde or any application change:
+gofti miyad replica ghadimi pod hashuuu kam kam vaa b y sterategy arom shoro mikone stop mikone va ba tanzimat jadid pod haye jadid roo miyare bala
+va badesh pod haye ghadimi kolan kill mishe
+faght va faght object replicaset ghadimiro negah midare unam toye state 0/0 va rs jadid ijad mishe 
+injori shoma mituni upgarde koni application zero downtime
+
+
+there is 3 way for editing deploymetn:
+*kubectl apply -f mohsen.yank
+*kubectl edit deployment.apps -n ns-1 mohse-dep > edit etcd live
+*kubectl set image deplpyment/mohsen-dep  nginx=<new_version>
+
+
+hala ch jori mishei in charkheeee upgarde ro negah vaaa monitor kard ba dastore
+kubectl rollout status deployment -n ns-1 mohsen-dep
+kubectl rollout history deployment -n ns-1 mohsen-dep
+
+ba inaa mituni mesle git y vaghti roll back koni b deplyemt ghablii inaaaa age moshke khorde bod upgarde
+
+kubectl annotate deploymetn.apps -n ns-1 mohsen-dep kubernets.io/change-casue=" harchi " >>>> ba in mesle tag mituni tag tor (version) bezni b taghiratet
+
+
+
+kubectl rollback undo > vase roll back kardn upgrade deployement
+
+rollback ham injoriye k khob kam kam pod haye repolicaset jaddi ro shoro mikone b kil kardan vaaaaa mire vase start pod haye replicaset va deployemt ghadimi k toye etcd negah dashte bod
+
+
+
+
+rolling update toye attribute hayedeploymetn chiye?
+in hamon ravesh upgarde deployment hesab mishe
+masaln age 4 ta pod dari mikhy ina beran oooo deployment jadid jaygozinesh beshan
+khob y done pod jadid az deployment jadid miyare bala mishe 5/4 yani 5 taa pod darim az 4 ta desire state
+vaghti k in jadid ok va stabel shod ye done az ghadimiyaro kill mikone jadide kmel jashoo migire va in charkhe edame dare
+in  rolling update haaa chnd taaa ravesh dare ini k gofim default va to ymal neminevisimesh
+ravesh haye dg ham hast
+in raveshaaa toye zaman bandi haye upgarde tasir gozare 
+in raveshaaa esmeshun chiye?
+*rolling update
+*recreate
+*blue/green
+*canary
+##########################################  objetc resouce quata ####################
+
+shoma ba in resource mituni begi majmoe pod haye yek namespace ch ghadr bashe limitatio ram cpu / tedad pvc/ tedad Repliction controll / tedad secret/ tedad service haa / tead loadbalancr/ tedad nodeports / tedad deployment va ....
+a way to limit total amount of computer resources that can be consumed by a set of pods in a namespace
+
+################################################ resource limit range ##################################
+
+ba in resourc mituni meghadr defautl va maxiumm resource limit baraye y indiviual pod toye y namesapce set koni
+
+#################################### service #########################################################
+service  hamon dargah vorod application man hastesh
+service k dari ijad mikoniiiii htmn bayd namespace ro begi vagrnaa toye namespace default ijad mikoneeeeeeee resource rooo
+
+vizeghi service: 
+ip hamishe sabt
+ba esm mituni b pod haye dg adreeshu bedi va in esmam sabeteee ijori mituni hata az ip service ham estefade nakoni
+
+ma 4 model service darim: 
+* cluster ip (internal ip) > faght az dakhele cluster mituni b in service vasl beshi
+toye in y serivce dari k y ip va port dareeeee va har traffic dakhelii miyad samtesh roooo forward mikone b pod attch shode behesh bar roye port contaner dakhelesh
+
+* nodeport > ba in servie mituni az biron clusetr ham b in service vasl beshiiii---- rasti nodeport mitune as a clusterip ham amal kone
+eyne balast yani y service dari k y ip va port dare vali joloye in serice yek port physici roye host baz mikone k un traffico forward mikone samte service- va service ham forward mikone same pod
+
+* loadbalacer > ina vase estefadash bayd tanzimat va thirdparty package estefade koni- hamon kareee nodeport ro dar entehaaa anja mideeeeee vaaaa kole clusetr az biron dar dastres gharar migireeee
+inooooo ba metallb piyadesazi mikonan
+kare metallb chiye ? bebin metallb miyad kare dhcp vase service haei k az jense loadbalancer sakhti rooo  najam mide- b service haye loadbalceri k sakhti ip mide- yani b service hat miyad b gheir az in k ip  dakheli daran y ip external ham mideeeeeeeeeeeeeeeee va in ip external mostaghiman az biron ghabale ping shodaneeee - mitune in ip az hamon range server haye worker va msteret bashe(ip mgmt)
+ -y km dastan dareee vase estefade azash
+chiz hayee dg ham mishe b joz metalln estefade kard mesle : traffic- celium va .. saligheiyee dg
+
+bebin didi to vmware shoma nat dari yaaa brideg! vaghti mizari roo nat vm haa r range dakheli khodeshum migiran va ba ip loptop miran to internet
+vali vaghti mizariii brideg vm haaaa ip az modem migiran vaaa vm haa va loptopet jofteshun ham rage mishan
+un nat mesle cluster ip mimone
+un brideg mesle loadbalancer
+
+******** metalb hamin karoo mikone- miyad b service haye az noe loadbalancer ip mide (dhcp) toye range host physici
+khode metal b sorate deployment roye kuberm miyad balaaaaaaa
+
+
+* extenalName >>> inooo mishe baaa nginx-ingress piyadesazi kard
+
+loadbalancer & externalName inaaaa jofteshun karee hamon nodeportooo mikonan valii khob tiye mohite baremetal tarjihan nodeport gozine behtarii hesab mishe
+vali vase estefade az loadbalancer niyazesh ineee k maaa toye shabake loadbalance config konim mesle Metallb
+
+network ma mitune toye yeki az in network haaa bashe
+
+
+kubectl get svc -o wide -n ns-1
+
+###############  pod dns policy ##############################################
+ 
+zamani k pod yaaa deployment k dari miyari bala mituni toye yaml y attribute tarif koni begi dns haye dakhele pod chi bashe chun default none hastesh
+3 ta halat dare:
+*cluster first : in default faale vaase pod va deployment ba in k esmesh default nist :) in migeee bro az core dns bepors
+* none : ignore dns setting from kuber envoirment and use dnsConfig filed in pod spec
+* default : pod biyad azz roye nodei k pod rosh hast hamon dns ro begire
+
+#################################################################################
+
+
+======== yaml file (configuration file) ==========
+
+har file yaml toye kuber 4 taa bakhshe mohem dare:
+apiVersion > bastegi b noe object dare mitune meghdaresh motafavet bashe(toye site kuber hast) masaln vase pod mishe apiVersion: v1
+kind
+metadata
+spec
+
+
+use yamllint.com for yaml validity
+
+========= pods & yaml  12 =======
+
+use vscode with proper plugins in extension > add yaml
+for using vscode and yaml file in it htmn search kon to google bayd y seri tanzimat toye vscode anjam bedi
+
+
+kubectl get pods
+vim pod-test.yaml
+kubectl create -f pod-test.yaml
+kubectl get pods
+kubectl describe pod-test
+
+========== kuber controllers =============
+
+servive controllers y joraei maghze poshte kuber hesab mishe
+object haye mokhtalef kuber roo monitor mikone va bar asae un taghirat emal mishe roye cluster
+yeki az controller haa kuber replica ha hastan
+vazife asli replication controller ine k check bokone k koliye pod haye yek application va instance hash b teade kafi bala basheeeeee,
+vali khob az vazayef dg un mishe b load balacncing vaaa scaling 
+fargheee replication controller & replica set chiye? (jofteshun zire majmoe controller hesab mishan)
+joftesh vase yekkare vali mesle ham nistan
+replication controller noskhte ghadimiye replica set hast- replica et jadid tareee va behtare va jadidan hame az in estefade mikonan
+yeki az farghashun in k to toye config yaml hashun age kind:replicaSet basheee Selector ham dare vali replicationcontroll inoo nadare
+
+vase sakhte yek replication controller y yaml file ba kind:replicationcontroller misazi
+
+kubectl create -f test.yaml
+kubectl get pods
+kubectl get replicationcontrollers
+
+karbord label vaa selector haaa chiyan?
+vase filter kardan beyna pod haaaaaa
+
+========= kuber deployment ==========
+vase bahse upgrade yaa downgrade estefade az deployment behtarin kareeeeee
+va vase monitor kardn in mozo ham  az mafhom rollout estefade mishe va vase monitor kardanesh ham commnadhaye kubectl rollout hast
+
+kubectl create -f mohsendep.yml --record >>> --record mige hame action(version ina manzoresh) roo record kon
+kubetctl get deployment
+kubectl get replicaset
+kubectl get pods
+kubectl delete deployment.yaml
+
+what is rollout and versioning?
+rollout? b procces sakhtan container haa dar background migan rollout yaaaaaaaa daghigh tar b process deploy version jadid yek app ya update yek app k az ghbal vojod dare
+kubectl rollout status <resource-Type>/resource-name >>> ino vase monitor kardan rollouting yek resoure kuber-masaln resoure deployment- statefulset
+kubectl rollout status deployment/my-app
+kubectl rollout history <>
+kubectl rollout undo <>
+
+maslan age yek deployment k avalin bar ba image nginx version 18 deploy kardi beri editesh koni begi ngnx version 16 beshe
+ino mituni ba command haye bala check koni
+
+
+kubectl describe deployments
+
+########################  kubernetes Networking #################
+y joraei pod mesle yek vm hesab mishe ( mesle yek vm k ip migire)
+pod zamani k recreat mishe ip avaz mishe - pas dastresi b pod az tarighe ip kheili kare khobi nist
+
+kubernetes service type:
+1- node port service: roye yek port listen mikone vaa traffico migire route mikone b yek pod(service un pod) khas
+2- cluster ip: in miyad dakhele cluster yek virtual ip ijad mikonek  k service haye dakhele cluster betunan ba ham sohbat konan
+3- loadbalancer
+
+
+
+
+
+
+######################## Lifecycel Management ( init container &&& sidecar container) ##########################
+
+ma goftim har pod mitune 1 ya chnd taaa container bashe
+vali orf inee k toye y pod 1 done container biyad balaa
+
+init container chiye? 
+toye y seri sharayet majbor mishim vase in k un container asli biyad balaaaaaa y seri init (inam khodeshun container hastan) benevisi k in sharayet roo faraham kone
+mishe goft in init haa up mishan kareshun rooo mikonan vaaa badesh exit mishan 
+masaln fk kon y init container miyad balaaaaa y direcroty ro copy mikonee ro host man vaaa owner shipeshuu inaro change mikone va bad mireeeee
+badesh k gharare container asliii biyad balaaaaaa pish fraz bayad in karaaa anjam shode basheeee
+masaln bro yaml flannerl ro bekhun inaaa koli init container daran
+
+######################### jobs , cronjobs ########
+
+cronjobs:
+kuber y resource dare b esme cronjobs k mitni bahash melse cronjob os kar koni
+mituni biyay masaln begi har 5 saat az etcd backup begir
+
+jobs:
+
+y resource hast k y podiye k miyad balaaaa y kari roooo y bar anjam mide va mire paein 
+its commonly used for tasks
+
+################## self healing probes ######################
+3 taa probe darim toye kuber: livness, readiness, startup probes
+
+
+
+######################### kubernetes backup and restore ##############################################
+etcdctl > this is utility for backup
+rabti b kuber nadare har databaseo az jenseee etcd rooo mituni injori azash backup begiri
+
+velero ham y tools dg vase backup hesab mishe
+
+###################################### kubernetes security ( certificate)#####################################
+hame componenet haaa toye kuber vase sohbat ba ham 
+.cert
+.key
+jodagone daraaaaan
+kojan inaaa? 
+inaaa roye node master toye in masir haaa:
+/etc/kubernetes
+/etc/kubernetes/pki
+gharar daran
+
+
+shoma zamani k dari kuber roo nasbm mikoniii
+hamon jaaa k dari mizani kubeadmin init
+unjaa mituni begi kuber az ca dakheli khodesh estefade nakoneee va b jash az ca sazman estefade bokone
+in optional hastesh
+b ca sazman migeee externally manage
+
+age az ca khode kuber estefade konim 
+aksare ca haaaa 365 roeza hastan y seriaaa mesle etcd vaa ca 9 sale
+ba har bar upgarde in certificate haa update mishan
+
+
+
+apiserver.cert
+apiserver.key
+
+kubectl >>> admin.cert
+kubectl >>> admin.key
+
+kubeproxy.cert
+kubeproxy.key
+
+
+kube-controller manager >> container-manager.cert
+kube-controller manager >> container-manager.key
+
+
+kube-scheduler >>>> scheduler.cert
+kube-scheduler >>>> scheduler.key
+
+
+kubelet.cert  >>>>> /var/lib/kubelet/pki
+kubelet.key   >>>>> /var/lib/kubelet/pki
+
+
+etcdserver.cert
+etcdserver.key
+
+
+
+ba ch commandii mishe vaziateee in certificate harooo check kard?
+kubeadm --help
+
+kubeadm certs --help
+kubeadmin certs cetificate-key
+kubeadmin certs check-expiration
+kubeadmin certs generate-csr
+kubeadmin certs renew
+
+
+
+
+
+how to renew certificate:
+first backup from:
+/etc/kubernetest/*.conf
+/etc/kubernetes/pki/*
+~/.kube/config
+
+then
+
+cd /etc/kubernetes/pki
+openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
+kubeadm certs check-expiration
+kubeadm certs renew all (done done ham mishe renew kar/ --help ham mituni begiri)
+
+tips: bade renew kardn certificate haaaa bayd roye master pod haaaa restart beshan
+
+
+mituni pod hashunuu hata pak ham bokoniiiii k dobare ijad beshan k befhaman certa hashun renew shodeeeee
+age yaml file haye toye masire /etc/kubernetes/manifests ro pak koni in poda haaa pak mishan va age dobare copy koni to in masir pod haa dobare recreat mishan vali ba cert jadid
+
+
+##################################
+roye yeki az master haaaa bezan:
+
+Kubectl cordon node2 >>>> yani node 2 unschdule bokon dg fln nabinesh- by pasesh kon- age az ghabl chizi rosh hast kar mikone vali chize jadidi dg rosh nabar
+
+Kubectl uncordon node2
+
+kubectl drain node2 >>> ham unschedule mikone ham in k age pod active ham dare ro stop mikone va kuber majbor mishe k har podi roye in bod rooo bebare roye y node dg dobare start mikone
+
+kubectl cluster-info >> y data koli az kole kuber mide
+kubectl cluster-info
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&&&&&&&& kuber foroghi $$$$$$$$$$$$$$$$
+landscape.cncf.io >>> hame tools haro moarefi karde
+kubeproxy >>> hich traffici az serverhaye cluster kuber mostaghim b ham rah nadaran hatmn htmn roye hame node haa kube-porxy nasb hast (ham master ham worker) 
+pas toye har node gharar bashe darkhasti b node dg bere aval traffic mire dakhele proxy un node badesh mire dahkle kube porxy node maghsad vad badesh kube proxy maghsad mide b kubelete k roye maghsad nasbeee
+
+rastiii b sorate pishfarz pod haa hamishe roye worker up mishan na roye master
+valiii mituniii beri ino config koni
+vali b sorate defaut roye master faght pod hayeee systemi up mishan ( chun khode etcd -api vaaaa ina hame b sorate pod up mishan)
+
+
+faghta va faghat api server baaa etcd sohbat mikone
+baghiye componnet haaa ba api server sohbat mikonan
+
+
+
+
+kubernetes(k8s)
+
+
+
+
+
+
+#################### kuber youtube command ################################
+
+each pod get its own ip address
+and ips are not permanent 
+vase hamin k ip pod permant nist mirim soraghe service k ip sabet behemon mide
+service attach pod mishan
+va omree service haa rabti b omre pod nadare- vaghti pod kill mishe service mimoneeeee
+service haaa 2 model daran: externale - internal
+external: vase etesal az biron b dakhele cluster kuber estefade misheee  http://myapp-serviceIP:port
+internal : vase etesalat dakheli estefade mishe
+age bekhaym az service haye external estefade konim dastresi behesh az tarighe ip va port emkan pazir mishe vali khob age bekhaym az domain.com vaaa https:// estefade konim chi mishe pas?
+khob injaa kuber mige az ingress estefde kon.
+pas aval traffice kharefi mire samte ingress va ingress traffic ro forward mikone b samte dakhel.
+
+ConfigMap: external configuration of your application
+configmap mitune attach pod beshe vaa y seri config k un pod mikhad ro behesh bede
+fk kon y pod dari k az noe application hastesh vaaa etelaAt database k roye yek pod dg hast ro mikhad- miyay y objct configmap misazi username-password-url db ro tosh mizari va attach pod mikoni
+
+secret:used to store secret data- base64 encoding
+password- username etc
+
+
+
+volumes:
+!!! k8s doesnt manage data persistance
+
+
+replica: 
+the replicaaa is connected to the same service
+
+
+service:
+service has 2 functionalities: permanent ip & loadbalancing
+
+
+replica:
+database cant replicated via deplpoyemt, chera? 
+because database has state
+soooooo
+use
+Deployment for stateless app
+and 
+statefulset for stateful apps and database
+
+
+pas 2 taaa object darim: deployment va statefulset
+
+k config statefuleset asln asln asooon nist
+
+
+kubelete interacts with both: the containers and the host
+kubelte starts the pod with container inside
+
+
+kubeproxy : forwarding traffic from services to the pods
+
+tips: roye hameyee node haye cluster (worker haaaa) bayd inaaa nasb bashe: 1-kubelte 2-kubeproxy 3- continer runtime (docker- crio- podman)
+roye hameye master haaaa 4 taa process hamishe hast: 1- api server 2- scheduler(in resource haro check mikonek k pod haye jadid roye kodom node biyad bala) 3- controller manager ( in karesh detect kardan state changes hast- check mikone ro kodom node ch pod oftade yaa balast) 4- etcd
+
+vaghti 2 taaa master miyari bala : api server haaa loadbalce kar mikonan
+etcd ham b sortae distributed storage across all master nodes
+
+
+
+client (admin kuber) vase kar baaa cluster kuber ya miyd az dashboard kuber estfeade mikone CLI  (kubectl) yaa kubernetes API kkkkk hame inaaaa tahesh vasl mishan b api server k roye master node haaa nasb shodeeeeeee
+az in tarighe k shoma mituni b cluster query bezani yaaa update bezani
+api server : 2 taa naghshe moheme dg ham dare 1- cluster gateway 2- acts as a gatekeepr for authentication
+yani api server vaghti k yek request behesh mire amaliat validate ham anjam mide
+
+
+
+shomaa ba dastore kubectl create mituni roye cluster kuber object besazi vali khob dastore kubectl create pod nadarim chera?
+chun pod kochektarin unit roye kuber hesab mishe
+va b jash maaa eployment misazim
+kubectl create deployment NAME --image=image [--dry-run] [option]
+kubectl create mohsen-dep --image-nginx 
+kubectl get deployment
+kubectl get pod > injaa vaghti in commadno mizani ghablesh esme deploymento mige badesh esme replisa set vaaaa badesh id pod ro migeeeee
+mohsen-dep-<replicaSetID>-<podID>
+pas pod moteshakel az deployment- replica set hast
+
+vaghti command kubectl get replicaset rooo mizani toye khoroji esme deployment roo neshun mide badesh id replicaset rooo
+
+pas replicaset manage mikone replicas of the pod roooo
+
+
+passs layehaa intoriye: 
+deployment manage replicaset
+replicaset manage pods
+pods manage containers
+
+
+tips: 
+every thing below the deployment is handeled by kubernetes
+pas vaghti deployment ro edit mikoni khode kuber har chi zire deployetn basharooo kamel taghir mide
+
+
+
+tips: mituni deployment rooo edit koni-zamani k edit mikoni pod va deploymen ghabli terminate mishe
+va hamon deploymetn yek id jadid migiree va jadid miyad balaaaaaa
+
+kubectl apply -f test.yaml
+tips: kuber know when to create or update pods
+
+
+
+each yaml file has 3 parts:
+1-metadata
+2-specification > in bastegi b noe object attribute hash motefavete
+3- status >> in khod b khoda tavasot kuber create va ijad mishe k in bakhsh hamishe vase check kardn desire state vaaaa actual state hastesh- kuber hamishe status rooo ba chizi k toye specification goftim chekc mikone 
+in k current status chiye az kojaam miyad? az etcd
+
+
+
+in object haaaaa ch joriii b ham vasl mishan?
+mesle deploymetn vaa service ? inaaa ch jori b ham vasl mishan?
+ba labels and selector
+
+toye yaml haaa metadata daraye label hastesh 
+va spec daraye selector
+
+va hameye label ba name uniq b selector ba hamon name match khahand shod
+
+
+
+
+
+commands: 
+kubectl get all
+kubectl get nodes
+kubectl get pod
+kubectl get services
+kubectl create -h >> help mide
+kubectl create deployment
+kubectl get deployment
+kubectl create pod
+kubectl get replicaset
+kubectl edit deployment <dep-name> >>>> khoroji in mishe yek auto generated configuration file with default value
+kubetctl logs <podsname>
+kubectl describe pod [pod-name]
+kubectl exec -it [pod-name] -- bin/bash >>> miri dakhele pod(container)
+kubectl delete deploymetn [name] >>> in khodesh miyad deploymetn - relicaset vaa pod haye in deployment roo pak mikone
+mituni ba yaml k service va deploymet sakhti ham pak koni
+kubectl delete -f mohsen-service.yaml
+kubectl delete -f mohsen-dep.yaml 
+kubectl apply -f test.yaml
+kubectl delete -f test.yaml
+kubectl apply -f mohsen-dep.yaml
+kubectl apply -f mohsen-servcie.yaml
+kubectl get pod
+kubectl get service
+kubectl describe service mohsen-service > in mige k in service b ch podhaei motasele, ip hashunam mige
+kubectl get pod -o wide >>> in ip pod haro ham mide
+kubectl get deploymetn mohsen-dep -o yaml  > nginx.yaml    >>>> in akharin yaml (hameye 3 bakhs ba status) roo behem mide > yani az etcd migire behemon mide
+
+kubectl apply -f mohsen-secret.yaml
+kubectl get secret
+
+
+
+service haa:
+internal > toye kuber behesh migan clusterip
+external  >> toye kuber behesh migab loadbalance
+external serivce gheire in k ip dakheli ham dareeeee yek ip external ham migireeeeeee va yek nodeport k mishe hamon port roye host physici os
+service ip az range khodsh dare
+pod ip az range khodesh dare
+in 2ta yani pod va service az tarighe namespace b ham vasl mishan
+vali vase estefade az service yek port ham expose mishe
+
+
+
+
+
+
+
+############################## kolan dar morede affinity va taint #############################
+khob goftim scheduler kareee node selection roo bar ohde dare
+schedulet  5 taa parametere ro check mikone vase in k node entekhab kone:
+1- resource requirmetn 2- node capacity		3- taint and toleration 	4-node selector 	5-affinity and anti affinity
+
+1- resource requirmetn: in check mikone k meghdar ram va cpu k toye tanzmiat pod va yaml mgim ro kodom node dare
+2- node capacity: har nodei k hardwaree ghavi tarii dare scheduler mifahme va sayesh ine berize ro un
+4-node selector: toye config ymal pod va deployment mituni begii ro ch workeri deploy shooooo ba zadan label
+kubectl label node server-02 disk=ssd / kubectl label nodes serevr-02 disk- > in pak mikone lable rooo
+kubectl get nodes --show-labels
+kubectl get nodes -o wide
+kubectl describe nodes server-02 >>> inja mituni lable harooo bebiniiii
+
+
+5-affinity and anti affinity:
+base on node's label or pod's label
+
+affinity type: node & pod
+
+node affinity: label mizani ro node va b pod haa migi roye in label haa up shoooo va faghatam mituniii beyne in node haa ja b jaaa beshi
+
+pod affinity: 
+2 taa pod hamishe bayad roye yek node kenare ham bashan
+
+
+pod anti-affinity:
+2 taa pod hargez nabayd roye yek node kenare ham bshan
+
+
+halaaaa har 3 tayee in affinity type haaa mitunan * required yaaaaaaaaa * preferred baaashaaaaaaan
+required yaani in k agee rule k neveshtiiii meet nashod koaln pod ro up nakon.
+prefered vali intori nist- miyay darsad migi k masaln 80% say kon rulei k goftamoooo anjam bedi 20% ham biyaa folan jaha pod ro up kon.e3u7 m\ 
+
+
+example: y nod affinity az noe prefred ro darim:
+
+affinity:
+ nodeaffinity:
+   prefreedDuringSchedulingIgnoreDuringExecution:
+    - weight: 80
+      preference:
+        matchexpression:
+           - key: disk
+             operator: In
+             values: 
+               - ssd
+
+
+
+taint and toleration:
+taint roye node emal mishe- y vijegi hesab mishe k betuni bahash pod ro reject koni
+roye nodei k taint shode nemituni pod up koni
+masaln taint az noe noschedule
+mage in k un node toleartion vasash neveshete shode bashe va un pod un toleration ro meet kone.
+in toleration ham serfan y label hastan
+
+masaln in pod calico ch jori roye master omad bala?
+master taint az noe noschedule dare > kubectl describe nodes worker02
+taints: node-role.kubernets.io/control-plane=Noschedule
+hala in pod calico ch jori ro master omade bala?
+aval yamleshu negah kon
+kubectl edit pods calico_pod_name -n kube-system
+toye in y toleration search kon- y key value vase vase in k in taint ro igonre kone dare mesle in:
+tolerations:
+- effect: NoExecute
+  operator: Exists
+
+
+
+3 ta halat dare:(taint effect)
+* noschedule : yani pod haaa reject beshan mage in k toleration marbote vojod dashte basheeeeeeeeee
+* noexecute : hich podi k toleration ro nadashte bashe bala nemiyad- age az ghabl ham chizi rosh bashe unaro ro ham mifrest mireeeeeee
+* preferNoschedule
+
+
+ch jori taint benevisim:
+injori:
+kubectl taint nodes worker-02 disk=ssd:NoSchedule
+
+
+priority class & preemption policy
+
+priority class chiye: y rahiii vase emal parameter prioprity b y pod hesab mishe
+mishe y parameter beyne 0 ta yek milioyon b y pod bedi har chi in adad bishtar bashe priority bala tareeeeeee
+
+hala preemption policy chiye?
+in miyad bar asase priority classi k set kardi tasmim migireee k ch kari anjam bede.
+3 taaa halat dare:
+* preempt lower proiority > default > in mige k poda haei  priority bala tarii daran ejaze daran preempt konan pod haei ba priority haye kam tar roooooo
+yani chi?
+masaln fk kon roye y worker 2 taaa pod dari
+pod1 va pod 2
+pod1 priority class 1000 roo dare
+pod2 priority class 10 roo dare
+khob pas pod1 priority bala tari dare- khob age vase in 2 taa y preemption policy benevisim 
+harvaght pod1 resource kam biyareee mitune pod2 ro evict koneee vaa befresteee roye y node dg
+* ifNootherpods
+* Never 
+
+
+hala inaro ch jori mitunin estefade konim:
+priorityclass yek objectee k toye yaml in prioritycalss y jash preemptionpolicy ham mituni set koni
+bad k dari yaml pod yaa deployment minevisi mituni in object ro behesh pass bedi
+
+
+Pod disruption budget (PDB)
+yek resource k ensure mikone hamisheee certain number of pods y dafei evict nashaaaaaan yani hamishe darsade khasi az pod haa bala bashe
+maslan fk kon y deployment dari k tosh gofti 6 ta replicaaa hamishe bala basheee
+hala in 6 taa masln mikhan roye 2 ta worker biyan balaaaa
+fk kon resource kam miyad va to majbori tedadi az in pod haro az dast bedi
+ba PDB yani in k mituni begi chnd darsad az darkhast man ro minimun anjam bede ( y joraei y seri az parameter haye scheduler ro bypass mikone)
+masaln migi doroste k man 6 ta mikhastam valiiiii to dg ba minimum 2 taa biya balaaa, age kam tar mishe chun resource nadariii koln cancel kon dastanoooooooo
+
+
+
+
+################################# 25 ##########################################
+Authentication, authorization & admission control >>>  3 ta marhaleee ta y user betune b clusetr maaa vasl beshe
+authenticatin: in k asln ki betune vasl beshe
+authorization: in k hala k vasl shodi ch kari betuni bokoni
+admission control: in k darkhast secure va safe bashe
+
+vaghti y user mikhd y dastore sade bezane roye kuber ba kubctl haa har chi
+yani user betune roye clusetr ma dasttresiiii dashte bashe
+in user mitune user service ham bashe ( service account ) vase rahandaziye service khasi toye cluster
+ba sthe dastresi haye mokhtalef
+
+user vas in dastresiiii bayd y token dashtee bashe
+in token kojast?
+vase user hayeee dg maaa mitunim token haye dg dashte bashim
+vali vase y user admin k roze aval kubernetes nasb kardeeeeee token toye file kubeconfig hastesh
+
+toye ~/.kube/config yaaa hamon file kubeconfig
+k in file roooo ma az masire /etc/kubernetes/admin.conf copy vaa rename mikonim toye homedirecroty useri k mikhaym ba kuber kar kone.
+hala toye in file chiye?
+token
+certificate-autirity-data
+ip server master : https://masterip:6443
+va koli config dg
+valiiii y zoj key toye in file vojod dare k in key haaa baese mishan k maaaa mitunim b clustermon vasl beshim
+* client-certificate-data
+* client-key-data
+
+pas in file kubeconfig moheme
+
+
+halaaaaa maa chand taaaa Auth method darim:
+1- service account (each service account has its own token that use to authenticate clients - in ravesh vase zamani k user haye ziyadi mikhan b cluster vasl beshan kheili khobe
+2- x.509 certificate authentication
+3- webhook authentication ( y chizi melse active ya ipa server k user haaa az tarighe in b cluster vasl beshan)
+
+
+dashboard hayee graphici meseleee rancher yaaaa openshift k amaln daran baa kuber kar mikonan (b jaye estefade az kubectl) 
+vase in k in dashboard haa betunan b cluster vasl beshan bayd y service account beheshun ekhtesas bedim
+
+pas har app yaaa adami yaa dashboardi k bekhad b cluster dastresi dashte bashee baydb y service account dashte bashe
+ba sthe dasresi jodagone
+
+mishe in dasresiii haro baa service account ijad kard mishe ba certoo key ijad kard, in optional hastesh dg
+
+toye service account to miyay b har service account y token midi
+token baaa certificateee(cert+key) kamelan motefavete
+2 taa raveshee jodan
+
+service account y resource kuber (sa) k eskhtesasn vase yek namspace hastesh
+yani vaghti mikhy sa bezasi in sa toye yek ns khas ijad mishe va wide nist
+har ns k ijadm mish b sorate default y user sa dare b esme sa-default k hich dastresi b hich jaa nadare vali pod haye dakhele un ns az in sa estefade mikonnan (default permission)
+ghable version 1.24 vaghti sa misakhti khodesh y token misakht assign in user mikard vali dg in dastan montafiiii shod
+hala byd khodet darkhast token bedi
+pas vaght mikhy sa besazi miyay y yaml vase sakhte sa misazi
+y yaml vase request token misazi tokenrequest.yml
+in token roo mituni toye y  resource secret negah darii har jaaa niyaz shod estefade koni- yni farayandsh dasti shod dar sorati k ghabln inaaa automatic bod
+kubectl api-resource | grep -i service
+
+marahele sakhete sa va token:
+
+marhale 0:
+kubectl create serviceaccount monitoring-agent-SA
+
+marhale 1: 
+apiversion: v1
+kind: secret
+metdata:
+	name: monitoring-aganet-sa
+	annotations:
+		kubernetes.io/service-account.name: monitoring-agent-sa
+type: kubernetes.io/service-account-token
+
+
+marhale 2:
+apiversion: authentication.k8s.io/v1
+kind: tokenrequest
+metdata:
+	name: monitoring-aganet-sa
+spec:
+	audience:
+	- rbac.authorization.k8s.io
+	serviceaccountname: monitoring-agent-sa
+
+
+ta injaaaa y servivce account sakhti k tokeneshuuu gozashtiii dakhele secret vaaaa in token bind in service account ham shode
+hala mitunim vasash masaln clusterrole v a clusterroleBinding taaarif konim
+k in 2 taam resource kubernetes hastan
+
+marhale 3:
+sakhte yaml clusterrole
+
+marhale 4: 
+sakhte yaml clusterrolebinding
+
+dar nahayat sa sakhte mitune motabegh baaa tanzimat emaliiiii y seri jaha to cluster dastresi dashte bashe
+
+bad az inaaa mituniiii test ham begiri k useri k sakhti dorosto kar mikone yaa na:
+kubectl auth can-i --list --as=system:serviceaccount:default:mohsensa
+
+
+
+
+ba sakhteee SA dari bakhsheee authentication roo ok mikoni
+vase bahse authrozation bayd in berim soragheeee RBAC ( role-based acces control)
+rbak : what actions a user or component can perform- this ensure that user and component have access only to the resource thay are authroized to access.
+
+
+hala rbac 4 taaa halat dare k 2 ta 2 taa ba ham joft mishan:
+*role vaaaa *rolebinding ////// *clusterrole vaaaa  *clusterrole binding 
+hala farghe role ba clusterrole chiye? role faght vase yek namespace hastesh vaaaa b ns haye dg dastresi nakhahi dasht
+vali clusterrole vase kole entire cluster hastesh
+vase y done service account shoma mituni har chnd taaa role va cluster role k dost dari tarif bokoni
+
+
+inam hameee resouce kuber hastan 
+
+
+hala b sorate kholase bekham begam mishe in:
+masaln y sa misazi b esme prometeous
+mikhay in sa toye ns-mon dastresi admin dashte basheeee amaaaa toye entire cluster dastresi get faght dashte bashe
+
+
+kubectl api-resource | grep -i role
+
+pas vase ijad y access vase sa bayd 3 taaaa yaml benevisi
+yeki vse ijad sa
+yeki vase ijad role or cluster role
+yeki vase rolebinding ya clusterrole binding
+
+
+hala age un kasi k mikhad vasl beshe human hastesh khob sakhte sa jodagine vajeb nist - yani roye khode os (os haye cluster kuber) goroh ya user misazam
+vali age mikhy service khasi roye cluster kar kone (non human) bayd htmn sa besazi - mesle gitlab graphanaaa va ....
+
+
+
+bahse admission cotrol dg kheili kheili restrict vaa hich jaaa estefade nemisheeeeee
+vali unam dastan haye khodeshuuu dare
+vali karbordesh vase bahse enforce kardan rule haa va polici haaaa ghable in k yek resource roye cluster kuber ijad yaaa update besheeeee
+masaln miyay y admission control minevisi (policy) k age kasi khast y deployment roye clsuetr ijad konee bayd toye yamlesh htmn affinity va ..... chntd chize dg ro hatmn gheyd kone
+age gheyd nakard khataa bede vaaa ijad nashee, 
+yani policy mizari vase ijad deployment
+
+ya mituni y model dg admission control benevisi k age masan yamlesh masaln mizan masrafe cpu va ram tosh nabud admission control biyad behesh ezafe kone bad ijaad kone.
+
+
+
+###### storage #############################################
+maaa chnd model storage type darim:
+* hostpath
+* emptyDir
+* configMaps
+* Secret
+* pvs
+* pvc
+
+configmaps and secret:
+ina ch jori kar mikardan? 
+to zamani k dari yaml configmap yaaaa secrect ro minevisi
+mitunii to dele in yaml har chand taa file khasti besazi vaaa tosh dar chi khasti benevisi
+vaghti in yaml roye kuber emal mishe in filee haa sakhti toye etcd save mishe vaaa mituni begiii roye container roye ch masiri mount beshan
+yani dependcy az host haaaa azad mishe vaaa az roye etcd mount mikoni roye pod haaaaaa
+
+
+ ro k khob y file misazi vaa bad mituni mount koni dakhele pod
+
+hostpath: hostpath volumes allow you to mount a directory from the host nodes's filesystem into a pod -- kheili recommned nist vali
+hostpath az container engine estefade mikoneeee va hich ertebati toye in process khode kuber nadareeeeeee
+estefade az hostpath y irad dare chun pod maaa k malom nist roye ch workeri gharar dareee
+dar natije vaghti mikhy filesystemi ya directoyr rooo mount koni dakhele pod bayd roye kole worker haaaa un masir oo file haro besazi- chun pod haaaa malom nist k koja miyan bala
+dar natijeee masaln age /tmp/test ro mount kardi az roye worker01 toye pod vaghti mire roye worker02 /tmp/test worker2 
+karbordesh bishtar toye daemonset hastesh
+chun injori roye har worker yek pod hast vaa in masiraaa ro mituni vase har worker config va mount koni
+
+bebin yani in zamani khobe k tajmiye data niyaz nabasheeee
+
+
+emptyDir:
+
+inam b sorate movaghateeee
+
+
+
+vali asli vaseee kuber mishe pv vaaa pvc:
+khob in ch jori amal mikone roye kuber
+
+pv1 pv2 pv3
+vaa poshe in pv mitune har chi bashe(nfs baseh- ceph baseh- amazon s3 bashe va .....)
+pv mesle y partition mimone
+bezar aval fargheshuuuu ba model docker swarm begam 
+ma toye swarm miyomadm y nfs server config mikardim
+bad fk kon man 25 taa worker dashtam - bad man mikhastam data /usr/share/nginx/ roo toye container haa persist konam
+miyomadam roye nfs server /nginx misakhtam k amaln ehsare mikone b /usr/share/nginx dakhele conntainer haaaa
+bad ba anssibel in nfs server roooo roye hameye worker haa mount mikardam
+kheilihaaaaa- y kare alakiiiiiii
+cheraaaa khoooob? chun man k nemidonam un containeriii k mikham in systemo vasash piyade sazi konam roye kodom worker hast- pas bayd alakiiiiiii vase kole cluster in kar mikardam
+
+vase hamin mirim soraghe pv k khode kuber recommend mikone
+kuber mige to nfs serveretoo bede dasteee pv man 
+nfs client rooo man khodam handel mikonam
+roye har workeriii k podet raft man vasat /nginx rooo jaa b jaaa mikonma :))))))))))))))) niyaz nist inooo roye hameye workerhaaa ijad koni
+yani roye har workeri k podet raft mount point vaa nfs client roo manage mikone
+b in vizegiiii kuber migan storage proviosioning
+
+halaaa pvc chiyeee: 
+yani in k masaln deployment man az tarigheeee pvc biyad az pv estefadeee kone
+masaln pvc miyad mige masire /nginx roo bede b man baaa hajm 10GB
+pvc behet ghabeliyat size limit ham mide (ino ghablan roye docker swarm nadashtim- age /nginx roye host por mishod roye container ham faza por mishod)
+shomaaaa vase yek deployment mituni pvc haye ziyadi dashte bashiiiiiiiiiii
+pas pod haye maa az tarighee pvc b pv vasl mishan
+
+
+age bekhaym moadel sazi konim ba lvm:
+nfs server = physical volume -pv
+pv1 = volume group- vg
+pvc = logical volume - lv
+
+pv va pvc acccess mode daran---albate in access roye pv tarif mishe va pvc b ers mibareee masaln:( RWO(read write once- in yani age 3 ta pod dari faght y pod mitune mount kone) va .......)
+albte access mode ro mishe mostaghim roye pvc ham tarif kard
+pv = globaly toye cluster
+pvc = in faght vase specific ns estefade mishe
+
+
+
+pv: in mesle y partion mimone - to miyay in pv ha roo az har technology k hast misazi bad in pv ro as a pv tavil kuber midi mabaghi dastan roo khode kuber manage mikone
+masaln fk kon man y deployment mikhym besazim 5/5 ---- y daemon set mikham besazam--- y pod taki mikham besazm
+hala fk kon man mikham toye deploymentiii k mikham besazam in masiraaaa az toye storage man mount bshan toye pod deployment
+masaln /usr/share/nginx/html
+/app 
+/etc/nginx/conf.d
+yani in 3 taa masir oo man mikham roye pod haye khodam datashun rooooo persist konam
+khob miyam roye pv1 khodam k masaln poshtesh nfs hastesh in 3 ta masiro injori misazam
+/html
+/app
+/conf.d
+
+ 
+
+halaaa pvc chiyeee: hamon lv toye lvm hesab mishe 
+yani in k masaln deployment man az tarigheeee pvc biyad az pv estefadeee kone
+
+
+goftim pv ya pvc mode haye mokhtalef daran:
+rwo : read write once >>> fk man 4 ta worker daram- y deployment daram k byad 3 az 3 balaaa bashe- va roye hameye in pod haaa /app vojod dare k in masir az tarighe yek pvc roye pv1 k (rwo) hast roye masir /tmp/app persist mishe- chun pv az noe rwo hast age avalin pod roye node 2 biyad bala va /app ro mount kone pod haye dg roye node haye 1 3 va 4 nemitunan /app ro toye podeshun mount konan vaa error mikhoran, pas khode kuber un 2 ta pod dg ro ham byd bekhatere in mozo htnm roye node 2 app kone- chun faghat node 2 mitune in pv ro mountk kone, unam bekhatrer rwo k dare- yni toye mode rwo har nodei zod tar podesh up beshe va /app ro mount kone un pv dg ejaze nemiden node dg behesh vasl besheeeee---- yni amaln faghat hamin single node b pv man dastresi dare
+rwo bishtar vase pod haei k tak pod hastan kheili bishtar karbord dare- yaa affinity role dare
+
+rox : read only many 
+rwx read write many >>> in kheili khobo okeye
+rwop: read write once pod
+
+
+
+
+toye yml sakhte pv y vizegi b esme  persistanceVolumeClaminpolicy vojod dare k mitune: *retain yaaa *recycle basheeeeeeeeeee
+retain yni age pod man ja b ja shod raft toye y worker dg- datataei k toye pv hastesh rooo hefz mikone
+vali toye recycle pod ja b ja besheeee pv ro kamel pak mikone (rm -rf mizane)
+
+
+
+
+
+######### statefulset ###########
+statefulset (sts)
+goftim deployment vaaa daemonset vase applcation haye stateless estefade mishan
+stateless haa chiyaa bodan? meselee http haaa k (request va response) yani bayd darkhasti bashe taa responisiii biyad- chizi madam vasl nist
+amaaaaa statefulset vase applicatin hate stateful kar mikonan (mesle data base haaa k connection ijad mishee va ghat nemishe mituni ta zamani k vasli query begiri- meslee ssh- mesle websocket) vaghtiam k ghat beshe ghat shodeeeee dg :)
+
+statefulset aya maziyati nesbat b deployment ya daemon set dare?
+toye dep ba daemon zmani k pod az roye yek node mire roye y node dg toye un lahze connection haaaa ghat mishan- yani user motevajeh ghati mishe
+ama toye statefulset intori nist bekhate in 4 taaaa vizeghi:
+*predicable pod name > esme pod ghabele pishbini
+* fixed indivisual dns name >>>> esme pod haroooooo fix mikoneeee dg random b pod esm nemide
+* headless service > dg balasar statefulset az service estefade nemikoni
+* ordered pod creation 
+
+toye deployment yaa daemon set maaa baa svc b pod haaa vasl mishim (svc ham dns name dasht dg)
+vali toye statefulset maaa mitunim svc nadashte bashim vaaa pod haaa bedon in k svc vojod dashte bashe b ham vasl beshan- albte mituni svc ham bezari
+
+
+
+
+
+longhorn = yek rahe halee khob vase sakht pv hastesh - mesle nfs tore y joraeiyeeeee
+
+
+############################# ansible #####################################
+
+1-os > linux
+2-script> bash- python
+3-version control > git, git lab, git hub
+4-containerization > docker-LXI-CRI-O
+5-orchestration > swarm- kuber
+6-iac(infra as a code) > ansibel- terraform
+7-monitoring> prometeous, graphana
+8-cicd > gitlab ci - github action- jenkins
+
+
+injam mikhaym dar morede iag (infrastracture as code) sohbat konim:
+2 taaa model darim:
+* config manager haaaa
+* infra provisioner haaaaaaaaa
+
+
+toye dastee config manager haaa : **ansible- **puppet- chef- salt stack (in kheili asone)- cf engine
+70% ansible khobeee
+30% puppet
+puppet y vizegiye khob dare k mitune taghirat ro freeze kone- yani in k age configi ro az tarighe puppet bezani va begi freeze beshe- age kasi bere un ro taghir bede baz rollback mishe ba puppet
+
+toye daste infraa provioner haaa: terrafrom- aws cloud formation(unique khode aws)
+
+
+
+vali ansibel va terrafrom mitunan kare hamo cover konan az tarighe module haaa va plugin haaaaa vali kheili recommend nist
+
+
+karbord terraform chiye: bebin fk kon mikhay vasl shiii b aws yaaa gps
+rosh 150 taaaa  machine biyari balaaaaa- roshun y seri software inaaa biyari bala va nasb koni
+hanoz os nadari dg :) ansible b kar nemiyad
+injaaaa ansible karbord nadare k
+injaaa terrafor miyad 150 ta mashinooo misaze vaaa karashuuu mikone
+terrafor mitune daghighan kari k behrouz madani vase sakht y vm mikone ro az 0 taa 100 bokone (ip-disk-vlan- network va .....)
+terraform plugin haye ziyadi dare- ba aws kar mikone- ba google cloud kar mikone- baaa vsphere ham kar mikone
+
+
+
+
+khob berim soraghe nasb ansible:
+os (controller) htmn bayad linuxi basheeeeee
+roye contorller python 2(2.6 , 2.7) 3(3.5 or higher)
+roye mashine haye remote(target) behtare python nasb bashe- nabashe ham vali okeye va mishe kar kard
+ansible agentless kar mikoneeeee
+y joraei agent ansible hamin pythoni k rosh nasbeeeee
+ansible serviceless (daemonless) hastesh
+yani chi? yni in k ansible service khasi roye controller balaaa nemiyare- serfn zamani k sedash mizani ejra va badam exit mishe
+
+vali puppet: ham agent dare
+ham service agent dare roye contorller
+va ertebat puppet serevr ba target haaa az tarighe ssl hastesh- yaniiii stateless hastesh
+vali ansible ba ssh karm mikone k stateful hastesh
+sorate puupet bala tareee- chun ham roye contoller ham roye target ha y service hamshe balast va mishe report dashte hamisheeeeeee
+toye puppet manifest minevisi va agent haaa y msire khasi roye puppet server ro hey check mikonan- manifest jadid k bebinan khodeshun barmidaran toye target emal mikonan
+b chnd taa manifest roo ham k combine bshn migan catalog
+ catalog hamon playbook ansible hesab mishe
+zamabnesh DLS hast jaye yaml
+
+
+toye chef
+yml mishe: 
+agnet mishe: oHAI
+playbook: cookbook
+config haa: receipe
+
+
+
+teffafrom : agent less
+damemon less
+zabanesh : HCL (hashicorb lanuguage language)
+
+
+
+
+couchbase: y sherkate k db as a service mideeee- jaye in k baremetal db biyari bala mituniii az in sherkat db ro cloud begiri-mesle sherkat linkedin k hame db vase coauchbase hastesh
+
+
+
+
+
+ansible installation:
+vase nasb repo khasi nemikhad
+
+toye version haye ghadimi intori bod
+/etc/ansible/hosts >> in toye version haye jadid nist vali mituni besazi vaaaa ansible mire azash estefade mikone vali dg injaa ghadimi shode
+/etc/ansible/ansible.cfg >> inam ghadimi shode to in masir vali mituniii besazish
+
+toye version haye jadid tar dg hamon current directory ok tare vase kar
+
+
+>vim hosts
+server01 ansible_host=172.20.20.5 ansible_port=22 ansible_connection=ssh ansible_user=ansible ansible_sudo_pass=**** ansible_ssh_pass=***** 
+
+
+
+ad-hoc command >>>> yani dasti bekhay command befresti
+ansible [pattern] -m [module] -a "[module argument]"
+
+for example:
+ansible all -m ping
+ansibe all -m command -a "uptime"
+
+	
+
+ssh-keygen > y done sshkey roye host ansible baaaa user ansible ijad mikonim
+bad roye target server haaa in .pub copy mikonim- automaticesh mishe mesle zire: 
+ssh-copy-id ansible@10.20.25.15
+ssh-copy-id ansible@10.20.25.16
+ssh-copy-id ansible@10.20.25.17
+
+
+
+so ansible is a package of moudlesssssss> please check website: galaxy.asnible.com > vpn mikhad
+module haaa toye collection haye khas vojod daran
+maslan in module haye routine k vase mangae os maaa zash estefade mikonim toye collection ansible.builtin gharar dareee
+halaa age maslan khasti az tarighe ansible cisco switch config koniii bayd beri az module haye collection cisco estefade koni
+yani vasse estefade az collection haye dg bayd plugin un collection rooo nasb koni
+plugin amazon- plugin windows- plugin ......
+
+
+
+
+moudle haye karbordi:
+command >>> in dastore kheili hassas syntax haye pythoniii hastaaaa- havaset bashe command haei ro mizani 
+ba in moudel rahat mituni har commadn linuxi ro k mikhay b sorate ad-hoc yaaa role roye target serevr haaa ejraaa koni amaaaa y kam toye syntx haye hassa mesle $ | <  > inaaa girooo gor mikhoree
+vase hamin mamolan mirim soraghe module shell
+
+
+shell > in kheili behtar nesbat b shell k redirect inaaa dare-b syntax ham kam tar hassase
+
+row > in hich dependecy b python nadareeee- vali eyne shell&command kar mikone
+
+
+ansible all -m command -a "whoami"
+
+
+
+writing playbook:( b jaye in k commadn haye ad-hoc ro tak tak begim miyam b format yml hamaro y jaaam migm- mesle docker compose kar mikone)
+
+
+
+
+
+################################### jenkins ##############################
+	
+
+
+
+
+
+
+
+
+
+
+
+
