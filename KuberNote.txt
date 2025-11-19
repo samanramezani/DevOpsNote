@@ -1535,6 +1535,28 @@ retain yni age pod man ja b ja shod raft toye y worker dg- datataei k toye pv ha
 vali toye recycle pod ja b ja besheeee pv ro kamel pak mikone (rm -rf mizane)
 
 
+###### class DevOps persian (some more tips about storage class in kubernetes)#####s###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
