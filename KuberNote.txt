@@ -1537,7 +1537,26 @@ vali toye recycle pod ja b ja besheeee pv ro kamel pak mikone (rm -rf mizane)
 
 ###### class DevOps persian (some more tips about storage class in kubernetes)#####s###
 
+method haye persist karda data in kubernetes: 
+* pv 
+*pvc 
+* storage class
 
+storage must aavilable on all nodes
+
+storage mitune: san storage bashe- ceph
+persistence volume: (pv)
+
+kubectl get pv
+kubectl get pvc
+
+masaln y pv besaz b esme /app 10GB - pv mesle vg mimone to linux
+hala vase in k estefade konim bayad pvc besazim: masaln y pvc partition 3gb y pvc  partition 7gb 
+
+diffrenet type of pv access: 
+rwo: read wirte once
+rox: read only many
+rwx: read write many
 
 
 
